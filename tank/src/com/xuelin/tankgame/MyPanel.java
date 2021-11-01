@@ -13,12 +13,13 @@ import java.awt.event.KeyListener;
  */
 
 
-public class MyPanel extends JPanel implements KeyListener {
+public class MyPanel extends JPanel implements KeyListener, Runnable {
     Hero hero = null;
+    Enemy enemy = null;
 
     public MyPanel(){
-        hero = new Hero(100,100); // 初始化自己的坦克
-        hero.setSpeed(5);
+        hero = new Hero(500,500); // 初始化自己的坦克
+        enemy = new Enemy(100,0); // 初始化敌人的坦克
     }
 
     @Override
@@ -27,7 +28,16 @@ public class MyPanel extends JPanel implements KeyListener {
         g.fillRect(0, 0 , 1000, 700);
 
         // 画出坦克-封装方法
-        drawTank(hero.getX(), hero.getY(), g, hero.getDirect(), 0);
+        drawTank(hero.getX(), hero.getY(), g, hero.getDirect(), 0); // 自己的坦克
+
+        Shot st = hero.getShot();
+        if (st != null && st.isLive()) {
+            drawShot(st.getX(), st.getY(), g);
+            System.out.println();
+        }
+
+        drawTank(enemy.getX(), enemy.getY(), g, enemy.getDirect(), 1);
+
     }
 
     // 编写方法，画出坦克
@@ -87,6 +97,11 @@ public class MyPanel extends JPanel implements KeyListener {
         }
     }
 
+    public void drawShot(int x, int y, Graphics g) {
+        g.setColor(Color.PINK);
+        g.fill3DRect(x, y, 1, 1 , false); // 子弹
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -108,11 +123,27 @@ public class MyPanel extends JPanel implements KeyListener {
             hero.setDirect(3);
             hero.moveLeft();
         }
+
+        if (e.getKeyCode() == KeyEvent.VK_J) {
+            System.out.println("shot");
+            hero.shot();
+        }
         this.repaint();
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    @Override
+    public void run() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        this.repaint();
     }
 }

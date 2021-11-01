@@ -20,6 +20,7 @@ public class Game extends JFrame {
 
     public Game() {
         mp = new MyPanel();
+        new Thread(mp).start();
         this.add(mp);
         this.setSize(1000, 750);
         this.addKeyListener(mp);
