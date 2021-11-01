@@ -33,7 +33,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         Shot st = hero.getShot();
         if (st != null && st.isLive()) {
             drawShot(st.getX(), st.getY(), g);
-            System.out.println();
+//            System.out.println("在发射");
         }
 
         drawTank(enemy.getX(), enemy.getY(), g, enemy.getDirect(), 1);
@@ -99,7 +99,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 
     public void drawShot(int x, int y, Graphics g) {
         g.setColor(Color.PINK);
-        g.fill3DRect(x, y, 1, 1 , false); // 子弹
+        g.draw3DRect(x, y, 1, 1 , false); // 子弹
     }
 
     @Override
@@ -138,12 +138,14 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 
     @Override
     public void run() {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        while (true) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-        this.repaint();
+            this.repaint();
+        }
     }
 }

@@ -24,7 +24,7 @@ public class SellTicket {
 }
 
 
-class Sell extends   Thread {
+class Sell extends  Thread {
     private static int ticketNum = 100;
     private  static boolean loop = true;
 

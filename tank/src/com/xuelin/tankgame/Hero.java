@@ -36,11 +36,7 @@ public class Hero extends Tank{
     }
 
     public Shot getShot() {
-        if (!(st == null)) {
-            return st;
-        } else {
-            return null;
-        }
+        return st;
     }
 
 }
