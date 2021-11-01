@@ -20,9 +20,11 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     int enemySize = 3;
 
     public MyPanel(){
-        hero = new Hero(500,500); // 初始化自己的坦克
+        hero = new Hero(100,100); // 初始化自己的坦克
 
+        // 初始化敌人坦克，使用vector集合保存，每个坦克都生成一个shot线程
         for (int i = 0; i < enemySize; i++) {
+            // 每个坦克相距100像素
             Enemy enemy = new Enemy((100 * (i + 1)), 0);
             Shot shot = new Shot(enemy.getX() + 20, enemy.getY() + 60, enemy.getDirect());
             enemy.shots.add(shot);
@@ -40,20 +42,22 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         // 画出坦克-封装方法
         drawTank(hero.getX(), hero.getY(), g, hero.getDirect(), 0); // 自己的坦克
 
+        // 获取自己坦克的shot对象，如果 存在，则绘画shot
         Shot st = hero.getShot();
         if (st != null && st.isLive()) {
             drawShot(st.getX(), st.getY(), g);
 //            System.out.println("在发射");
         }
 
-        for (Enemy e :
-                enemys) {
+        // 遍历Vector 集合的Enemy 对象，获取每个Enemy对象中的shot集合并遍历绘画出来
+        for (Enemy e : enemys) {
             drawTank(e.getX(), e.getY(), g, e.getDirect(), 1);
             for (int i = 0; i < e.shots.size(); i++) {
                 Shot shot = e.shots.get(i);
                 if (shot.isLive()) {
                     drawShot(shot.getX(), shot.getY(),g);
                 }else {
+                    // 子弹不存在，从集合中去除
                     e.shots.remove(shot);
                 }
             }
@@ -122,6 +126,29 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     public void drawShot(int x, int y, Graphics g) {
         g.setColor(Color.PINK);
         g.draw3DRect(x, y, 1, 1 , false); // 子弹
+    }
+
+    // 判断我方的子弹是否击中敌人坦克
+    public static void hitTank(Shot s, Enemy enemy) {
+        // 判断s 击中坦克
+        switch (enemy.getDirect()) {
+            case 0:
+            case 2:
+                if (s.getX() > enemy.getX() && s.getX() < enemy.getX() + 40 &&
+                        s.getY() > enemy.getY() && s.getY() < enemy.getY() + 60) {
+                    s.setLive(false);
+                    enemy.isLive = false;
+                }
+                break;
+            case 1:
+            case 3:
+                if (s.getX() > enemy.getX() && s.getX() < enemy.getX() + 60 &&
+                        s.getY() > enemy.getY() && s.getY() < enemy.getY() + 40) {
+                    s.setLive(false);
+                    enemy.isLive = false;
+                }
+                break;
+        }
     }
 
     @Override

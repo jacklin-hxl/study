@@ -13,6 +13,11 @@ public class Shot implements Runnable{
     int y; // 子弹y坐标
     int direct = 0; // 子弹方向, 0 1 2 3 上右下左
     int speed = 2; // 子弹速度
+
+    public void setLive(boolean live) {
+        isLive = live;
+    }
+
     boolean isLive = true;
 
     public boolean isLive() {
@@ -45,7 +50,7 @@ public class Shot implements Runnable{
                         break;
                 }
 
-//                System.out.println(x + ", " + y);
+                System.out.println(x + ", " + y);
 
                 if ( x <=0 || x >= 1000 || y <=0 || y>= 750 ) { // 有一个满足条件就进入
                     System.out.println("子弹线程退出");

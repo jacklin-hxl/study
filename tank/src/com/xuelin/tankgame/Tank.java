@@ -12,6 +12,16 @@ public class Tank {
     private int x; // 横坐标
     private int y; // 纵坐标
     private int direct; // 坦克方向
+    boolean isLive = true;
+
+    public boolean isLive() {
+        return isLive;
+    }
+
+    public void setLive(boolean live) {
+        isLive = live;
+    }
+
 
     private int speed = 1; // 坦克速度
 
