@@ -1,5 +1,7 @@
 package com.xuelin.tankgame;
 
+import java.util.Vector;
+
 /**
  * @author : xuelin
  * @version V1.0
@@ -10,6 +12,7 @@ package com.xuelin.tankgame;
 
 public class Enemy extends Tank{
 
+    Vector<Shot> shots = new Vector<>();
 
     public Enemy(int x, int y) {
         super(x, y);

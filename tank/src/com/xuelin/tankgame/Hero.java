@@ -1,5 +1,8 @@
 package com.xuelin.tankgame;
 
+import java.util.List;
+import java.util.Vector;
+
 /**
  * @author : xuelin
  * @version V1.0
@@ -9,6 +12,8 @@ package com.xuelin.tankgame;
 
 
 public class Hero extends Tank{
+
+    private List<Shot> shot = new Vector();
 
     private Shot st = null;
 

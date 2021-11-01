@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Vector;
 
 /**
  * @author : xuelin
@@ -15,11 +16,20 @@ import java.awt.event.KeyListener;
 
 public class MyPanel extends JPanel implements KeyListener, Runnable {
     Hero hero = null;
-    Enemy enemy = null;
+    Vector<Enemy> enemys = new Vector<>();
+    int enemySize = 3;
 
     public MyPanel(){
         hero = new Hero(500,500); // 初始化自己的坦克
-        enemy = new Enemy(100,0); // 初始化敌人的坦克
+
+        for (int i = 0; i < enemySize; i++) {
+            Enemy enemy = new Enemy((100 * (i + 1)), 0);
+            Shot shot = new Shot(enemy.getX() + 20, enemy.getY() + 60, enemy.getDirect());
+            enemy.shots.add(shot);
+            new Thread(shot).start();
+
+            enemys.add(enemy);
+        }
     }
 
     @Override
@@ -36,7 +46,19 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 //            System.out.println("在发射");
         }
 
-        drawTank(enemy.getX(), enemy.getY(), g, enemy.getDirect(), 1);
+        for (Enemy e :
+                enemys) {
+            drawTank(e.getX(), e.getY(), g, e.getDirect(), 1);
+            for (int i = 0; i < e.shots.size(); i++) {
+                Shot shot = e.shots.get(i);
+                if (shot.isLive()) {
+                    drawShot(shot.getX(), shot.getY(),g);
+                }else {
+                    e.shots.remove(shot);
+                }
+            }
+        }
+
 
     }
 

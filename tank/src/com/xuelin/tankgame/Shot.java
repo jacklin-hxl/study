@@ -4,7 +4,7 @@ package com.xuelin.tankgame;
  * @author : xuelin
  * @version V1.0
  * @date 2021/11/1 1:08
- * @Description:
+ * @Description: 坦克子弹对象
  */
 
 
