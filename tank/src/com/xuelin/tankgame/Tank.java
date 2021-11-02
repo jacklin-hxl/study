@@ -23,7 +23,7 @@ public class Tank {
     }
 
 
-    private int speed = 1; // 坦克速度
+    private int speed = 5; // 坦克速度
 
     public Tank(int x, int y) {
         this.x = x;

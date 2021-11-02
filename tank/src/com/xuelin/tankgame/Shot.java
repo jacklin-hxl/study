@@ -33,7 +33,7 @@ public class Shot implements Runnable{
 
     @Override
     public void run() {
-        while (true) {
+        while (isLive) {
 //            synchronized (this) {
                 switch (direct) {
                     case 0:
@@ -50,10 +50,9 @@ public class Shot implements Runnable{
                         break;
                 }
 
-                System.out.println(x + ", " + y);
+//                System.out.println(x + ", " + y);
 
                 if ( x <=0 || x >= 1000 || y <=0 || y>= 750 ) { // 有一个满足条件就进入
-                    System.out.println("子弹线程退出");
                     isLive = false;
                     break;
                 }
@@ -66,6 +65,8 @@ public class Shot implements Runnable{
             }
 
         }
+
+        System.out.println("子弹线程退出");
     }
 
     public int getX() {

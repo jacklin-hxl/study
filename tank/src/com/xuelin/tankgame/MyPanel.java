@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Iterator;
 import java.util.Vector;
 
 /**
@@ -17,9 +18,14 @@ import java.util.Vector;
 public class MyPanel extends JPanel implements KeyListener, Runnable {
     Hero hero = null;
     Vector<Enemy> enemys = new Vector<>();
+    Vector<Bomb> bombs = new Vector<>();
     int enemySize = 3;
 
-    public MyPanel(){
+    Image image1 = null;
+    Image image2 = null;
+    Image image3 = null;
+
+    public MyPanel() {
         hero = new Hero(100,100); // 初始化自己的坦克
 
         // 初始化敌人坦克，使用vector集合保存，每个坦克都生成一个shot线程
@@ -32,6 +38,9 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 
             enemys.add(enemy);
         }
+        image1 = Toolkit.getDefaultToolkit().getImage(Panel.class.getResource("/1.png"));
+        image2 = Toolkit.getDefaultToolkit().getImage(Panel.class.getResource("/2.png"));
+        image3 = Toolkit.getDefaultToolkit().getImage(Panel.class.getResource("/3.png"));
     }
 
     @Override
@@ -49,8 +58,20 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 //            System.out.println("在发射");
         }
 
+
+
         // 遍历Vector 集合的Enemy 对象，获取每个Enemy对象中的shot集合并遍历绘画出来
-        for (Enemy e : enemys) {
+        Iterator<Enemy> iterator = enemys.iterator();
+        while(iterator.hasNext()) {
+            Enemy e = iterator.next();
+            if (st != null && st.isLive()) {
+                hitTank(st, e);
+            }
+
+            if (st != null && !e.isLive()) {
+                iterator.remove();
+            }
+
             drawTank(e.getX(), e.getY(), g, e.getDirect(), 1);
             for (int i = 0; i < e.shots.size(); i++) {
                 Shot shot = e.shots.get(i);
@@ -63,7 +84,28 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
             }
         }
 
+        for (int i = 0; i < bombs.size(); i++) {
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Bomb b = bombs.get(i);
+            if (b.life > 6) {
 
+                g.drawImage(image1, b.x, b.y, 60, 60, this);
+                System.out.println();
+            } else if (b.life > 3) {
+                g.drawImage(image2, b.x, b.y, 60, 60, this);
+            } else {
+                g.drawImage(image3, b.x, b.y, 60, 60, this);
+            }
+
+            b.lifeDown();
+            if (b.life == 0) {
+                bombs.remove(b);
+            }
+        }
     }
 
     // 编写方法，画出坦克
@@ -129,7 +171,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     }
 
     // 判断我方的子弹是否击中敌人坦克
-    public static void hitTank(Shot s, Enemy enemy) {
+    public void hitTank(Shot s, Enemy enemy) {
         // 判断s 击中坦克
         switch (enemy.getDirect()) {
             case 0:
@@ -138,6 +180,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
                         s.getY() > enemy.getY() && s.getY() < enemy.getY() + 60) {
                     s.setLive(false);
                     enemy.isLive = false;
+                    bombs.add(new Bomb(enemy.getX(), enemy.getY()));
                 }
                 break;
             case 1:
@@ -146,6 +189,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
                         s.getY() > enemy.getY() && s.getY() < enemy.getY() + 40) {
                     s.setLive(false);
                     enemy.isLive = false;
+                    bombs.add(new Bomb(enemy.getX(), enemy.getY()));
                 }
                 break;
         }
