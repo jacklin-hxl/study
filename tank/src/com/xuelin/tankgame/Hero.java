@@ -13,7 +13,11 @@ import java.util.Vector;
 
 public class Hero extends Tank{
 
-    private List<Shot> shot = new Vector();
+    public List<Shot> getShots() {
+        return shots;
+    }
+
+    private List<Shot> shots = new Vector();
 
     private Shot st = null;
 
@@ -36,7 +40,7 @@ public class Hero extends Tank{
                 st = new Shot(getX(), getY() + 20, getDirect());
                 break;
         }
-
+        shots.add(st);
         new Thread(st).start();
     }
 

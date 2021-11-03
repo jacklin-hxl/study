@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -34,6 +35,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
             Enemy enemy = new Enemy((100 * (i + 1)), 0);
             Shot shot = new Shot(enemy.getX() + 20, enemy.getY() + 60, enemy.getDirect());
             enemy.shots.add(shot);
+            new Thread(enemy).start();
             new Thread(shot).start();
 
             enemys.add(enemy);
@@ -52,11 +54,24 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         drawTank(hero.getX(), hero.getY(), g, hero.getDirect(), 0); // 自己的坦克
 
         // 获取自己坦克的shot对象，如果 存在，则绘画shot
-        Shot st = hero.getShot();
-        if (st != null && st.isLive()) {
-            drawShot(st.getX(), st.getY(), g);
-//            System.out.println("在发射");
+        List shots = hero.getShots();
+        for (int i = 0; i < shots.size(); i++) {
+            Shot st = (Shot) shots.get(i);
+            if (st.isLive()) {
+                drawShot(st.getX(), st.getY(), g);
+                for (int j = 0; j < enemys.size(); j++) {
+                    Enemy e = enemys.get(j);
+                    if (st != null && st.isLive()) {
+                        hitTank(st, e);
+                    }
+
+                    if (st != null && !e.isLive()) {
+                        enemys.remove(e);
+                    }
+                }
+            }
         }
+
 
 
 
@@ -64,13 +79,6 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         Iterator<Enemy> iterator = enemys.iterator();
         while(iterator.hasNext()) {
             Enemy e = iterator.next();
-            if (st != null && st.isLive()) {
-                hitTank(st, e);
-            }
-
-            if (st != null && !e.isLive()) {
-                iterator.remove();
-            }
 
             drawTank(e.getX(), e.getY(), g, e.getDirect(), 1);
             for (int i = 0; i < e.shots.size(); i++) {
