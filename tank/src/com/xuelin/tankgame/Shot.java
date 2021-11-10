@@ -12,7 +12,7 @@ public class Shot implements Runnable{
     int x; // 子弹x坐标
     int y; // 子弹y坐标
     int direct = 0; // 子弹方向, 0 1 2 3 上右下左
-    int speed = 2; // 子弹速度
+    int speed = 4; // 子弹速度
 
     public void setLive(boolean live) {
         isLive = live;

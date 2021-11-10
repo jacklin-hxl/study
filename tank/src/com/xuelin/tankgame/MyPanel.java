@@ -27,17 +27,13 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     Image image3 = null;
 
     public MyPanel() {
-        hero = new Hero(100,100); // 初始化自己的坦克
+        hero = new Hero(500,500); // 初始化自己的坦克
 
         // 初始化敌人坦克，使用vector集合保存，每个坦克都生成一个shot线程
         for (int i = 0; i < enemySize; i++) {
             // 每个坦克相距100像素
             Enemy enemy = new Enemy((100 * (i + 1)), 0);
-            Shot shot = new Shot(enemy.getX() + 20, enemy.getY() + 60, enemy.getDirect());
-            enemy.shots.add(shot);
             new Thread(enemy).start();
-            new Thread(shot).start();
-
             enemys.add(enemy);
         }
         image1 = Toolkit.getDefaultToolkit().getImage(Panel.class.getResource("/1.png"));
@@ -51,7 +47,9 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         g.fillRect(0, 0 , 1000, 700);
 
         // 画出坦克-封装方法
-        drawTank(hero.getX(), hero.getY(), g, hero.getDirect(), 0); // 自己的坦克
+        if (hero.isLive()) {
+            drawTank(hero.getX(), hero.getY(), g, hero.getDirect(), 0); // 自己的坦克
+        }
 
         // 获取自己坦克的shot对象，如果 存在，则绘画shot
         List shots = hero.getShots();
@@ -74,9 +72,6 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
             }
         }
 
-
-
-
         // 遍历Vector 集合的Enemy 对象，获取每个Enemy对象中的shot集合并遍历绘画出来
         Iterator<Enemy> iterator = enemys.iterator();
         while(iterator.hasNext()) {
@@ -84,12 +79,12 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 
             drawTank(e.getX(), e.getY(), g, e.getDirect(), 1);
             for (int i = 0; i < e.shots.size(); i++) {
-                Shot shot = e.shots.get(i);
-                if (shot.isLive()) {
-                    drawShot(shot.getX(), shot.getY(),g);
-                }else {
-                    // 子弹不存在，从集合中去除
-                    e.shots.remove(shot);
+                Shot st = e.shots.get(i);
+                if (st.isLive()) {
+                    drawShot(st.getX(), st.getY(), g);
+                    hitTank(st, hero);
+                } else {
+                    e.shots.remove(st);
                 }
             }
         }
@@ -181,25 +176,25 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     }
 
     // 判断我方的子弹是否击中敌人坦克
-    public void hitTank(Shot s, Enemy enemy) {
+    public void hitTank(Shot s, Tank tk) {
         // 判断s 击中坦克
-        switch (enemy.getDirect()) {
+        switch (tk.getDirect()) {
             case 0:
             case 2:
-                if (s.getX() > enemy.getX() && s.getX() < enemy.getX() + 40 &&
-                        s.getY() > enemy.getY() && s.getY() < enemy.getY() + 60) {
+                if (s.getX() > tk.getX() && s.getX() < tk.getX() + 40 &&
+                        s.getY() > tk.getY() && s.getY() < tk.getY() + 60) {
                     s.setLive(false);
-                    enemy.isLive = false;
-                    bombs.add(new Bomb(enemy.getX(), enemy.getY()));
+                    tk.isLive = false;
+                    bombs.add(new Bomb(tk.getX(), tk.getY()));
                 }
                 break;
             case 1:
             case 3:
-                if (s.getX() > enemy.getX() && s.getX() < enemy.getX() + 60 &&
-                        s.getY() > enemy.getY() && s.getY() < enemy.getY() + 40) {
+                if (s.getX() > tk.getX() && s.getX() < tk.getX() + 60 &&
+                        s.getY() > tk.getY() && s.getY() < tk.getY() + 40) {
                     s.setLive(false);
-                    enemy.isLive = false;
-                    bombs.add(new Bomb(enemy.getX(), enemy.getY()));
+                    tk.isLive = false;
+                    bombs.add(new Bomb(tk.getX(), tk.getY()));
                 }
                 break;
         }
@@ -213,25 +208,26 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     // 处理键按下的事件
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_W) {
-            hero.setDirect(0);
-            hero.moveUp();
-        }else if (e.getKeyCode() == KeyEvent.VK_D) {
-            hero.setDirect(1);
-            hero.moveRight();
-        }else if (e.getKeyCode() == KeyEvent.VK_S) {
-            hero.setDirect(2);
-            hero.moveDown();
-        }else if (e.getKeyCode() == KeyEvent.VK_A) {
-            hero.setDirect(3);
-            hero.moveLeft();
+        if (hero.isLive()) {
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+                hero.setDirect(0);
+                hero.moveUp();
+            } else if (e.getKeyCode() == KeyEvent.VK_D) {
+                hero.setDirect(1);
+                hero.moveRight();
+            } else if (e.getKeyCode() == KeyEvent.VK_S) {
+                hero.setDirect(2);
+                hero.moveDown();
+            } else if (e.getKeyCode() == KeyEvent.VK_A) {
+                hero.setDirect(3);
+                hero.moveLeft();
+            }
+            if (e.getKeyCode() == KeyEvent.VK_J) {
+                System.out.println("shot");
+                hero.shot(3);
+            }
+            this.repaint();
         }
-
-        if (e.getKeyCode() == KeyEvent.VK_J) {
-            System.out.println("shot");
-            hero.shot();
-        }
-        this.repaint();
     }
 
     @Override

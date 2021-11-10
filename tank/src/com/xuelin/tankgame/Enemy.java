@@ -12,8 +12,6 @@ import java.util.Vector;
 
 public class Enemy extends Tank implements Runnable{
 
-    Vector<Shot> shots = new Vector<>();
-
     public Enemy(int x, int y) {
         super(x, y);
         super.setDirect(2);
@@ -22,6 +20,7 @@ public class Enemy extends Tank implements Runnable{
     @Override
     public void run() {
         while (isLive()) {
+            shot(1);
             switch (getDirect()) { //随机取0-3
                 case 0:
                     moveUp();

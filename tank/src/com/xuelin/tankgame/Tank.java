@@ -1,5 +1,6 @@
 package com.xuelin.tankgame;
 
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -15,7 +16,16 @@ public class Tank {
     int y; // 纵坐标
     int direct; // 坦克方向
     boolean isLive = true;
-    int speed = 5; // 坦克速度
+    int speed = 2; // 坦克速度
+    int size = 1; // 子弹数量
+
+    public List<Shot> getShots() {
+        return shots;
+    }
+
+    List<Shot> shots = new Vector();
+
+    Shot st = null;
 
     public boolean isLive() {
         return isLive;
@@ -79,4 +89,28 @@ public class Tank {
         this.speed = speed;
     }
 
+    public Shot getShot() {
+        return st;
+    }
+
+    public void shot(int size) {
+        if (shots.size() < size) {
+            switch (getDirect()) {
+                case 0:
+                    st = new Shot(getX() + 20, getY(), getDirect());
+                    break;
+                case 1:
+                    st = new Shot(getX() + 60, getY() + 20, getDirect());
+                    break;
+                case 2:
+                    st = new Shot(getX() + 20, getY() + 60, getDirect());
+                    break;
+                case 3:
+                    st = new Shot(getX(), getY() + 20, getDirect());
+                    break;
+            }
+            shots.add(st);
+            new Thread(st).start();
+        }
+    }
 }
