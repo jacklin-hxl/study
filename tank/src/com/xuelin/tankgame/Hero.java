@@ -26,22 +26,24 @@ public class Hero extends Tank{
     }
 
     public void shot() {
-        switch (getDirect()) {
-            case 0:
-                st = new Shot(getX() + 20, getY(), getDirect());
-                break;
-            case 1:
-                st = new Shot(getX() + 60, getY() + 20, getDirect());
-                break;
-            case 2:
-                st = new Shot(getX() + 20, getY() + 60, getDirect());
-                break;
-            case 3:
-                st = new Shot(getX(), getY() + 20, getDirect());
-                break;
+        if (shots.size() < 5) {
+            switch (getDirect()) {
+                case 0:
+                    st = new Shot(getX() + 20, getY(), getDirect());
+                    break;
+                case 1:
+                    st = new Shot(getX() + 60, getY() + 20, getDirect());
+                    break;
+                case 2:
+                    st = new Shot(getX() + 20, getY() + 60, getDirect());
+                    break;
+                case 3:
+                    st = new Shot(getX(), getY() + 20, getDirect());
+                    break;
+            }
+            shots.add(st);
+            new Thread(st).start();
         }
-        shots.add(st);
-        new Thread(st).start();
     }
 
     public Shot getShot() {

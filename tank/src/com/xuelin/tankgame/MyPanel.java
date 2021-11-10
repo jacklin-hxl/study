@@ -69,6 +69,8 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
                         enemys.remove(e);
                     }
                 }
+            } else {
+                shots.remove(st);
             }
         }
 
