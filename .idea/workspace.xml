@@ -5,31 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e30ec187-b2b8-4821-a2bf-96351a6f47dd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/vertx/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vertx/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vertx/src/main/java/com/vertx/websocket/handler/Consumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vertx/src/main/java/com/vertx/websocket/handler/Producer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vertx/src/main/java/com/vertx/websocket/main/Start.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vertx/src/main/java/com/vertx/websocket/verticle/WebsocketVerticle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/io/Io01.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/syn/DeadLock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/syn/Homework01.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/syn/Homework02.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/syn/SellTicket.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/syn/WindowTest4.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Bomb.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Enemy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Game.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Hero.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/MyPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Shot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Tank.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/test/Check.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/test/ThreadState.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vertx/.gitignore" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +44,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -193,7 +172,8 @@
       <workItem from="1638269605299" duration="1555000" />
       <workItem from="1638272641044" duration="1270000" />
       <workItem from="1638281028003" duration="14078000" />
-      <workItem from="1638341157469" duration="27069000" />
+      <workItem from="1638341157469" duration="27459000" />
+      <workItem from="1638380499272" duration="369000" />
     </task>
     <servers />
   </component>
