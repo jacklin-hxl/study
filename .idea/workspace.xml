@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e30ec187-b2b8-4821-a2bf-96351a6f47dd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/vertx/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vertx/src/main/java/com/vertx/websocket/handler/Consumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vertx/src/main/java/com/vertx/websocket/handler/Producer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vertx/src/main/java/com/vertx/websocket/main/Start.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vertx/src/main/java/com/vertx/websocket/verticle/SenderVerticle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/io/Io01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/syn/DeadLock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/syn/Homework01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/syn/Homework02.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/syn/SellTicket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/syn/WindowTest4.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Bomb.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Enemy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Hero.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/MyPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Shot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/tankgame/Tank.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/test/Check.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tank/src/com/xuelin/test/ThreadState.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../../Program Files/Java/jdk1.8.0_241/src.zip!/java/util/HashSet.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$PROJECT_DIR$/../../Program Files/Java/jdk1.8.0_241/src.zip!/java/util/HashMap.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="208nJWGZ9MWmkPDAB4MnjpWPbjT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="Debugger_Data_Views_Java" />
+  </component>
+  <component name="ReaderModeSettings">
+    <option name="enabled" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Repo\study\out\production\study" />
+      <recent name="D:\Repo\study\tank" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Start">
+    <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xuelin.tankgame.Game" />
+      <module name="study" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xuelin.tankgame.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuickSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.algorithm.test.QuickSort" />
+      <module name="algorithm" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.algorithm.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Start" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.vertx.websocket.main.Start" />
+      <module name="vertx" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vertx.websocket.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test01 (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.map.collections.Test01" />
+      <module name="study" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.map.collections.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test01" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.map.test.Test01" />
+      <module name="study" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.map.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Start" />
+        <item itemvalue="Application.QuickSort" />
+        <item itemvalue="Application.Test01 (1)" />
+        <item itemvalue="Application.Test01" />
+        <item itemvalue="Application.Game" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e30ec187-b2b8-4821-a2bf-96351a6f47dd" name="Changes" comment="" />
+      <created>1635435013052</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635435013052</updated>
+      <workItem from="1636389445567" duration="56000" />
+      <workItem from="1636389513827" duration="77000" />
+      <workItem from="1636389600805" duration="49000" />
+      <workItem from="1636389679187" duration="24000" />
+      <workItem from="1636389724249" duration="279000" />
+      <workItem from="1636390029703" duration="236000" />
+      <workItem from="1636390280475" duration="183000" />
+      <workItem from="1636390481128" duration="140000" />
+      <workItem from="1636390636562" duration="51000" />
+      <workItem from="1636390697461" duration="10000" />
+      <workItem from="1636390727389" duration="367000" />
+      <workItem from="1636548867350" duration="22000" />
+      <workItem from="1636548899930" duration="65000" />
+      <workItem from="1636548977157" duration="2597000" />
+      <workItem from="1636991695941" duration="5166000" />
+      <workItem from="1637070724048" duration="4153000" />
+      <workItem from="1637075223913" duration="4682000" />
+      <workItem from="1637164980538" duration="5963000" />
+      <workItem from="1637336517992" duration="5832000" />
+      <workItem from="1637425435451" duration="6177000" />
+      <workItem from="1637550811096" duration="1191000" />
+      <workItem from="1637929759561" duration="13422000" />
+      <workItem from="1638031601534" duration="3333000" />
+      <workItem from="1638269605299" duration="1555000" />
+      <workItem from="1638272641044" duration="1270000" />
+      <workItem from="1638281028003" duration="14078000" />
+      <workItem from="1638341157469" duration="26706000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tank/src/com/xuelin/tankgame/MyPanel.java</url>
+          <line>102</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tank/src/com/xuelin/io/BufferedStream.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tank/src/com/map/test/Test01.java</url>
+          <line>9</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="io.vertx.core.buffer.impl.BufferImpl" memberName="buffer" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>
