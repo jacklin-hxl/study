@@ -1,17 +1,27 @@
 package com.xuelin.client;
 
 import com.xuelin.common.Message;
+import com.xuelin.common.MessageType;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class CCSThread implements Runnable{
     private Socket socket;
-    private boolean loop;
+    private boolean loop = true;
+    private ObjectInputStream ois;
+    private ObjectOutputStream oos;
 
     public CCSThread(Socket socket) {
         this.socket = socket;
+    }
+
+    public CCSThread(Socket socket, ObjectInputStream ois, ObjectOutputStream oos) {
+        this.socket = socket;
+        this.ois = ois;
+        this.oos = oos;
     }
 
     // 维持通信
@@ -20,8 +30,18 @@ public class CCSThread implements Runnable{
         while (loop) {
             try {
                 System.out.println("客户端线程， 等待读取服务端消息");
-                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
                 Message o = (Message) ois.readObject();
+
+                switch (o.getMesType()) {
+                    case MessageType.MESSAGE_RET_FRIEND:
+                        String content = o.getContent();
+                        String[] array = content.split(",");
+                        System.out.println("============在线用户列表============");
+                        for (String s : array) {
+                            System.out.println(s);
+                        }
+                        break;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -2,6 +2,7 @@ package com.xuelin.view;
 
 
 import com.xuelin.client.ChatClient;
+import com.xuelin.common.MessageType;
 import com.xuelin.common.User;
 import com.xuelin.utils.Utility;
 
@@ -11,6 +12,7 @@ public class View {
 
     public static void main(String[] args) {
         new View().mainMenu();
+        System.exit(0);
     }
 
     public void mainMenu() {
@@ -29,8 +31,8 @@ public class View {
                     String pwd = Utility.readString(50);
 
                     User user = new User(userId, pwd);
-                    ChatClient chatClient = new ChatClient();
-                    boolean flag = chatClient.checkUser(user);
+                    ChatClient chatClient = new ChatClient(user);
+                    boolean flag = chatClient.checkUser();
 
                     if (flag) {
                         System.out.println("欢迎用户登录");
@@ -47,7 +49,7 @@ public class View {
                             key = Utility.readString(1);
                             switch (key) {
                                 case "1":
-                                    System.out.println("显示在线用户列表");
+                                    chatClient.onFirendList(MessageType.MESSAGE_GET_FRIEND);
                                     break;
                                 case "2":
                                     System.out.println("群发消息");
@@ -59,6 +61,7 @@ public class View {
                                     System.out.println("发送文件");
                                     break;
                                 case "9":
+                                    chatClient.onClose();
                                     loop = false;
                                     break;
                             }

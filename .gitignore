@@ -1,3 +1,4 @@
 ChatClient/*.iml
 .idea
 out
+ChatServer/*.iml
