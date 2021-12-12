@@ -52,9 +52,9 @@ public class ChatClient {
         return false;
     }
 
-    public void onFirendList(String messageType) {
+    public void sendByType(String getter, String content, String sendTime,String messageType) {
         if (oos != null && u != null) {
-            message.setAll(u.getUserId(), null, null, null, messageType);
+            message.setAll(u.getUserId(), getter, content, sendTime, messageType);
             send(message);
         } else {
             System.out.println("连接出错");

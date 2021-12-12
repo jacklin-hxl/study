@@ -3,7 +3,6 @@ package com.xuelin.client;
 import com.xuelin.common.Message;
 import com.xuelin.common.MessageType;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -40,6 +39,11 @@ public class CCSThread implements Runnable{
                         for (String s : array) {
                             System.out.println(s);
                         }
+                        break;
+                    case MessageType.MESSAGE_COMM_MES:
+                        String s = o.getContent();
+                        String sender = o.getSender();
+                        System.out.println("用户: " + sender + " 私聊你: " + s);
                         break;
                 }
             } catch (Exception e) {

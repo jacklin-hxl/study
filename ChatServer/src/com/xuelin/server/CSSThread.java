@@ -38,7 +38,7 @@ public class CSSThread extends Thread{
                     case MessageType.MESSAGE_GET_FRIEND:
                         String users = ThreadManage.getUsers();
                         message.setAll(null, msg.getSender(), users, null, MessageType.MESSAGE_RET_FRIEND);
-                        oos.writeObject(message);
+                        oos.writeUnshared(message);
                         System.out.println("获取在线用户列表");
                         break;
                     case MessageType.MESSAGE_CLIENT_EXIT:
@@ -47,7 +47,12 @@ public class CSSThread extends Thread{
                         loop = false;
                         System.out.println("用户: " + msg.getSender() + " 下线");
                         break;
-
+                    case MessageType.MESSAGE_COMM_MES:
+                        String getter = msg.getGetter();
+                        CSSThread cssThread = ThreadManage.get(getter);
+                        ObjectOutputStream oos = cssThread.getOos();
+                        oos.writeUnshared(msg);
+                        System.out.println("转发消息");
                 }
 
             } catch (Exception e) {
@@ -63,5 +68,21 @@ public class CSSThread extends Thread{
 
     public void setSocket(Socket socket) {
         this.socket = socket;
+    }
+
+    public ObjectOutputStream getOos() {
+        return oos;
+    }
+
+    public void setOos(ObjectOutputStream oos) {
+        this.oos = oos;
+    }
+
+    public ObjectInputStream getOis() {
+        return ois;
+    }
+
+    public void setOis(ObjectInputStream ois) {
+        this.ois = ois;
     }
 }

@@ -49,13 +49,17 @@ public class View {
                             key = Utility.readString(1);
                             switch (key) {
                                 case "1":
-                                    chatClient.onFirendList(MessageType.MESSAGE_GET_FRIEND);
+                                    chatClient.sendByType(null, null,  null, MessageType.MESSAGE_GET_FRIEND);
                                     break;
                                 case "2":
                                     System.out.println("群发消息");
                                     break;
                                 case "3":
-                                    System.out.println("私聊消息");
+                                    System.out.println("输入私聊者：");
+                                    String s = Utility.readString(50);
+                                    System.out.println("输入消息：");
+                                    String content = Utility.readString(200);
+                                    chatClient.sendByType(s, content, null, MessageType.MESSAGE_COMM_MES);
                                     break;
                                 case "4":
                                     System.out.println("发送文件");
