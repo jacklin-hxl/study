@@ -2,8 +2,9 @@
 
 def is_isbn_or_key(word):
     """
-    :param word: 请求的关键字
-    :return: 关键字类型
+    判断搜索的字段是类型，isbn or key
+    :param word: 请求的关键字，isbn or key
+    :return: 关键字类型 ，isbn or key
     """
 
     isbn_or_key = "key"
