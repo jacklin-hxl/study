@@ -1,4 +1,5 @@
-from httper import HTTP
+from app.lib.httper import HTTP
+from flask import current_app
 
 
 class YuShuBook:
@@ -18,6 +19,11 @@ class YuShuBook:
 
     @classmethod
     def search_by_keyword(cls, keyword, page):
-        # page = 1 , 0 - 15  page = 2 -> 1 * 15 + 1 - 15
-        result = HTTP.get(url=cls.keyword_url.format(keyword, (page - 1) * cls.pageCount, cls.pageCount))
+        # page = 1 , 1 * 0  ;  page = 2 -> 1 * 15 + 1
+        result = HTTP.get(url=cls.keyword_url.format(keyword, cls.solution_start(page),
+                                                     current_app.config["PAGE_COUNT"]))
         return result
+
+    @staticmethod
+    def solution_start(page):
+        return (page - 1) * current_app.config["PAGE_COUNT"]

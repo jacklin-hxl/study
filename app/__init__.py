@@ -1,9 +1,9 @@
 from flask import Flask
-import config
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(config)
+    app.config.from_object("app.setting")
+    app.config.from_object("app.secure")
 
     register_web(app)
     return app
