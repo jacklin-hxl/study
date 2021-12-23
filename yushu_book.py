@@ -7,7 +7,7 @@ class YuShuBook:
     关键字搜索： http://t.talelin.com/v2/book/search?q={}&start={}&count={}
     豆瓣api： https://api.douban.com/v2/book
     """
-
+    pageCount = 15
     isbn_url = "http://t.talelin.com/v2/book/isbn/{}"
     keyword_url = "http://t.talelin.com/v2/book/search?q={}&start={}&count={}"
 
@@ -17,6 +17,7 @@ class YuShuBook:
         return result
 
     @classmethod
-    def search_by_keyword(cls, keyword, count=15, start=0):
-        result = HTTP.get(url=cls.keyword_url.format(keyword, count, start))
+    def search_by_keyword(cls, keyword, page):
+        # page = 1 , 0 - 15  page = 2 -> 1 * 15 + 1 - 15
+        result = HTTP.get(url=cls.keyword_url.format(keyword, (page - 1) * cls.pageCount, cls.pageCount))
         return result
