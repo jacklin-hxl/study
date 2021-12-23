@@ -1,16 +1,21 @@
-from flask import Blueprint, jsonify
+from flask import jsonify, request
+from app.forms.book import SearchForm
 
 from helper import is_isbn_or_key
 from yushu_book import YuShuBook
 
 from . import web
 
-@web.route("/book/search/<q>/<page>")
-def search(q, page):
+@web.route("/book/search/")
+def search():
     """
-        q: keyword or isbn
-        page:
+        q: keyword or isbn   至少一个字符，有最大长度限制
+        page: 页数    正整数，有个最大值
     """
+    # q = request.args["q"]
+    #
+    # page = request.args["page"]
+    SearchForm(request.args)
 
     isbn_or_key = is_isbn_or_key(q)
     if isbn_or_key == "isbn":
