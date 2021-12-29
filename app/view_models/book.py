@@ -1,5 +1,6 @@
 
-class BookViewModel:
+@DeprecationWarning
+class _BookViewModel:
     """
     前端通过 isbn 搜索返回数据结构：
         {
@@ -83,4 +84,26 @@ class BookViewModel:
 
         return book
 
+class BookSingle():
+
+    def __init__(self, book):
+        self.title = book["title"],
+        self.publisher = book["publisher"],
+        self.pages = book.get("page") or '',
+        self.pric = book['price'],
+        self.summary = book["summary"] or '',
+        self.image = book["image"],
+        self.author = book['author']
+
+class BookCollection():
+
+    def __init__(self):
+        self.total = 0
+        self.books = []
+        self.keyword = ''
+
+    def fill(self, yushu_book, keyword):
+        self.total = yushu_book.total
+        self.books = [BookSingle(book) for book in yushu_book.books]
+        self.keyword = keyword
 
