@@ -4,6 +4,8 @@ from base import Base
 
 class Book(Base):
 
+    __tablename__ = "book"
+
     title = Column(type_=String(50), nullable=False)
     author = Column(type_=String(20), default="未知")
     binding = Column(type_=String(20))

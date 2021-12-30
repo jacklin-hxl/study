@@ -1,8 +1,11 @@
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String
 from base import Base
 
 
 class User(Base):
 
-    password = Column(type_=String(20))
-    username = Column(type_=String(20))
+    __tablename__ = "user"
+
+    password = Column(type_=String(50), nullable=False)
+    username = Column(type_=String(20), nullable=False)
+    email = Column(type_=String(20))
