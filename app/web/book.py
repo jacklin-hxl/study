@@ -8,6 +8,7 @@ from app.view_models.book import BookCollection
 
 from . import web
 
+
 @web.route("/book/search/")
 def search():
     """

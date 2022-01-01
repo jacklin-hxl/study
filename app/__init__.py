@@ -1,6 +1,7 @@
 from flask import Flask
 from app.models.base import db
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object("app.setting")
@@ -11,6 +12,7 @@ def create_app():
     db.create_all(app=app)
 
     return app
+
 
 def register_web(app):
     from app.web import web

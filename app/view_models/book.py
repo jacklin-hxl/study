@@ -35,6 +35,7 @@
     }
 """
 
+
 class BookSingle():
 
     def __init__(self, book):
@@ -45,6 +46,7 @@ class BookSingle():
         self.summary = book["summary"] or '',
         self.image = book["image"],
         self.author = book['author']
+
 
 class BookCollection():
 
