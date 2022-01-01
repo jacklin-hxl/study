@@ -10,8 +10,8 @@ class Base(db.Model):
     id = Column(type_=Integer, autoincrement=True, primary_key=True)
     status = Column(SmallInteger, default=1)
 
-    def set_attrs(self, values):
-        for key, value in values.items():
+    def set_attrs(self, **kwargs):
+        for key, value in kwargs.items():
             if hasattr(self, key):
                 setattr(self, key, value)
 
