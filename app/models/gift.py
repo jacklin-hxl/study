@@ -1,5 +1,5 @@
 from .base import Base
-from sqlalchemy import Column, String, Integer, Boolean
+from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 
 
@@ -12,6 +12,6 @@ class Gift(Base):
     __tablename__ = "gift"
 
     user = relationship("User")
-    uid = Column(type_=Integer, ForeignKey="user.id")
-    isbn = Column(type_=String(20), nullable=False, ForeignKey="book.isbn")
+    uid = Column(Integer, ForeignKey("user.id"))
+    isbn = Column(String(20), nullable=False)
     launched = Column(type_=Boolean, default=False)
