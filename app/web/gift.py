@@ -1,7 +1,7 @@
-
-from . import web
+from flask import current_app
 from flask_login import login_required, current_user
 
+from . import web
 from ..models.base import db
 from ..models.gift import Gift
 
@@ -15,11 +15,13 @@ def my_gifts():
 @web.route("/gifts/book/<isbn>")
 @login_required
 def save_to_gifts(isbn):
-    if Gift.query.filter_by(uid=current_user.id, isbn=isbn).first():
-        return "已经赠送"
-    gift = Gift()
-    gift.isbn = isbn
-    gift.uid = current_user.id
-    db.session.add(gift)
-    db.session.commit()
+    if current_user.can_save_to_list(isbn):
+        with db.auto_commit():
+            gift = Gift()
+            gift.isbn = isbn
+            gift.uid = current_user.id
+            current_user.beans += current_app.config["BEANS_UPLOAD_ONE_BOOK"]
+            db.session.add(gift)
     return "ok"
+
+

@@ -46,12 +46,14 @@ class YuShuBook:
     def search_by_isbn(self, isbn):
         result = HTTP.get(url=self.isbn_url.format(isbn))
         self.__fill_single(data=result)
+        return self
 
     def search_by_keyword(self, keyword, page):
         # page = 1 , 1 * 0  ;  page = 2 -> 1 * 15 + 1
         result = HTTP.get(url=self.keyword_url.format(keyword, self.solution_start(page),
                                                      current_app.config["PAGE_COUNT"]))
         self.__fill_collection(data=result)
+        return self
 
     def __fill_single(self, data):
         if data:

@@ -1,3 +1,5 @@
+from sqlalchemy.sql.elements import TextClause
+
 from .base import Base
 from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
@@ -14,4 +16,4 @@ class Gift(Base):
     user = relationship("User")
     uid = Column(Integer, ForeignKey("user.id"))
     isbn = Column(String(20), nullable=False)
-    launched = Column(type_=Boolean, default=False)
+    launched = Column(type_=Boolean,  server_default='0')

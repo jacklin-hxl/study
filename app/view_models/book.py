@@ -39,13 +39,24 @@
 class BookSingle():
 
     def __init__(self, book):
-        self.title = book["title"],
-        self.publisher = book["publisher"],
-        self.pages = book.get("page") or '',
-        self.pric = book['price'],
-        self.summary = book["summary"] or '',
-        self.image = book["image"],
-        self.author = book['author']
+        self.title = book.get("title",'')
+        self.publisher = book.get("publisher", '')
+        self.pages = book.get("page", '')
+        self.price = book.get("price", '')
+        self.summary = book.get("summary", '')
+        self.image = book.get("image", '')
+        self.author = book.get("author", '')
+        self.isbn = book.get("isbn", '')
+
+    @property
+    def intros(self):
+        """
+        鲁迅,老舍/出版社/¥35.00
+        """
+        res = ','.join(self.author)
+        intro = filter(lambda x: True if x else False, [res, self.publisher, self.price])
+        return ' / '.join(intro)
+
 
 
 class BookCollection():
