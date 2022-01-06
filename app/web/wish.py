@@ -15,7 +15,13 @@ def save_to_wish(isbn):
             wish.uid = current_user.id
             current_user.beans += current_app.config["BEANS_UPLOAD_ONE_BOOK"]
             db.session.add(wish)
+        return "ok"
+    return "false"
 
 @web.route("/my/wish/")
 def my_wish():
+    pass
+
+@web.route("/send/drift/<gid>")
+def send_drift(gid):
     pass

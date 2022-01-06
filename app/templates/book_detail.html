@@ -18,7 +18,7 @@
             <div class="description-font-margin">
                 <div>
                     <span>作者:</span>
-                    <span>{{ book.author }}</span>
+                    <span>{{ book.author | default('', true) | join(' , ')}}</span>
                 </div>
                 <div>
                     <span>出版社:</span>

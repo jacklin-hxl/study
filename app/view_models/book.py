@@ -39,14 +39,16 @@
 class BookSingle():
 
     def __init__(self, book):
-        self.title = book.get("title",'')
+        self.title = book.get("title", '')
         self.publisher = book.get("publisher", '')
-        self.pages = book.get("page", '')
+        self.pages = book.get("pages", '')
         self.price = book.get("price", '')
         self.summary = book.get("summary", '')
         self.image = book.get("image", '')
         self.author = book.get("author", '')
         self.isbn = book.get("isbn", '')
+        self.pubdate = book.get('pubdate', '')
+        self.binding = book.get("binding", '')
 
     @property
     def intros(self):

@@ -22,6 +22,7 @@ def save_to_gifts(isbn):
             gift.uid = current_user.id
             current_user.beans += current_app.config["BEANS_UPLOAD_ONE_BOOK"]
             db.session.add(gift)
-    return "ok"
+        return "ok"
+    return "false"
 
 
