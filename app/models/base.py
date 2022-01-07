@@ -38,5 +38,8 @@ class Base(db.Model):
 
     @property
     def create_datetime(self):
-        return datetime.datetime.fromtimestamp(self.create_time)
+        if self.create_time:
+            return datetime.datetime.fromtimestamp(self.create_time)
+        else:
+            return None
 
