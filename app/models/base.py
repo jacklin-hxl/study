@@ -1,7 +1,7 @@
 import datetime
 from contextlib import contextmanager
 
-from flask_sqlalchemy import SQLAlchemy as SQLAlchemy_
+from flask_sqlalchemy import SQLAlchemy as SQLAlchemy_, BaseQuery as BaseQuery_
 from sqlalchemy import Column, Integer, SmallInteger
 
 
@@ -18,7 +18,16 @@ class SQLAlchemy(SQLAlchemy_):
             raise e
 
 
-db = SQLAlchemy()
+class BaseQuery(BaseQuery_):
+
+    def filter_by(self, **kwargs):
+        if 'status' not in kwargs.keys():
+            kwargs["status"] = 1
+
+        return super(BaseQuery, self).filter_by()
+
+
+db = SQLAlchemy(query_class=BaseQuery)
 
 
 class Base(db.Model):
@@ -42,4 +51,3 @@ class Base(db.Model):
             return datetime.datetime.fromtimestamp(self.create_time)
         else:
             return None
-
