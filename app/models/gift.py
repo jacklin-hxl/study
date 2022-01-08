@@ -1,12 +1,11 @@
 from flask import current_app
-from sqlalchemy.sql.elements import TextClause
+from flask_login import current_user
 
 from .base import Base
 from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 
-from ..spider.yushu_book import YuShuBook
-from ..view_models.book import BookSingle
+from .wish import Wish
 
 
 class Gift(Base):
@@ -36,3 +35,13 @@ class Gift(Base):
     @classmethod
     def __parse_group(cls, recent_list):
         return [isbn[0] for isbn in recent_list]
+
+    @classmethod
+    def in_gifts(cls, isbn):
+        flag = False
+        if current_user.is_authenticated:
+            if Wish.query.filter_by(uid=current_user.id, isbn=isbn,
+                                    launched=False).first():
+                flag = True
+
+        return flag

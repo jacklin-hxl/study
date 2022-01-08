@@ -50,17 +50,9 @@ def search():
 
 @web.route("/book/<isbn>/detail")
 def book_detail(isbn):
-    has_in_gifts = False
-    has_in_wishes = False
-
     if is_isbn_or_key(isbn) == "isbn":
-        if current_user.is_authenticated:
-            if Wish.query.filter_by(uid=current_user.id, isbn=isbn,
-                                    launched=False).first():
-                has_in_wishes = True
-            if Gift.query.filter_by(uid=current_user.id, isbn=isbn,
-                                    launched=False).first():
-                has_in_gifts = True
+        has_in_wishes = Wish.in_wishes(isbn)
+        has_in_gifts = Gift.in_gifts(isbn)
 
         book = BookSingle(YuShuBook().search_by_isbn(isbn).books)
 
