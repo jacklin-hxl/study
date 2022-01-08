@@ -24,7 +24,7 @@ class BaseQuery(BaseQuery_):
         if 'status' not in kwargs.keys():
             kwargs["status"] = 1
 
-        return super(BaseQuery, self).filter_by()
+        return super(BaseQuery, self).filter_by(**kwargs)
 
 
 db = SQLAlchemy(query_class=BaseQuery)

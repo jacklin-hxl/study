@@ -28,3 +28,7 @@ def my_wish():
 @web.route("/send/drift/<gid>")
 def send_drift(gid):
     pass
+
+@web.route("/satisfy/<isbn>/<wid>")
+def satisfy_wish(isbn, wid):
+    pass

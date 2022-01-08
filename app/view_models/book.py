@@ -39,16 +39,18 @@
 class BookSingle():
 
     def __init__(self, book):
-        self.title = book.get("title", '')
-        self.publisher = book.get("publisher", '')
-        self.pages = book.get("pages", '')
-        self.price = book.get("price", '')
-        self.summary = book.get("summary", '')
-        self.image = book.get("image", '')
-        self.author = book.get("author", '')
-        self.isbn = book.get("isbn", '')
-        self.pubdate = book.get('pubdate', '')
-        self.binding = book.get("binding", '')
+        self.__parse(book)
+
+    def __parse(self, book):
+        for k, v in book.items():
+            if k == 'author' and not v:
+                setattr(self, k, ['未知'])
+                continue
+            elif not v:
+                setattr(self, k, '未知')
+            else:
+                setattr(self, k, v)
+
 
     @property
     def intros(self):
