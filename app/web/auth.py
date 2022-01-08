@@ -44,18 +44,15 @@ def forget_password_request():
     return render_template("auth/forget_password_request.html", form=form)
 
 
-@web.route("/")
-@web.route("/index/")
-def index():
-    return render_template("base.html")
-
 @web.route("/pending/")
 def pending():
     pass
 
+
 @web.route("/personal_center/")
 def personal_center():
     pass
+
 
 @web.route("/logout/")
 def logout():

@@ -69,3 +69,12 @@ def book_detail(isbn):
 
         return render_template("book_detail.html", book=book, wishes=trade_wish, gifts=trade_gift,
                                has_in_gifts=has_in_gifts, has_in_wishes=has_in_wishes)
+
+
+@web.route("/")
+@web.route("/recent/")
+def recent():
+    recent_list = Gift.recent()
+    gift_recent = [BookSingle(YuShuBook().search_by_isbn(isbn).books) for isbn in recent_list]
+
+    return render_template("index.html", recent=gift_recent)

@@ -1,8 +1,12 @@
+from flask import current_app
 from sqlalchemy.sql.elements import TextClause
 
 from .base import Base
 from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
+
+from ..spider.yushu_book import YuShuBook
+from ..view_models.book import BookSingle
 
 
 class Gift(Base):
@@ -17,3 +21,18 @@ class Gift(Base):
     uid = Column(Integer, ForeignKey("user.id"))
     isbn = Column(String(20), nullable=False)
     launched = Column(type_=Boolean,  server_default='0')
+
+    @classmethod
+    def recent(cls):
+        # fixme 时间排序存在问题
+        recent_list = Gift.query.with_entities(
+            cls.isbn).filter_by(
+            launched=False).group_by(
+            cls.isbn).limit(current_app.config['NUM_UPLOAD_BOOK']).all()
+        recent_list = cls.__parse_group(recent_list)
+
+        return recent_list
+
+    @classmethod
+    def __parse_group(cls, recent_list):
+        return [isbn[0] for isbn in recent_list]

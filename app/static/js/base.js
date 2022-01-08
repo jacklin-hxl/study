@@ -3,7 +3,7 @@
     if (url == '/my/gifts'){
         $('#gifts').addClass('linking')
     }
-    if (url == '/'){
+    if (url == '/' || url == '/recent/'){
         $('#recent').addClass('linking')
     }
     if (url== '/my/gifts'){

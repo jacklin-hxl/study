@@ -1,5 +1,4 @@
 from sqlalchemy import Column, String, Integer
-from sqlalchemy.sql.elements import TextClause
 
 from .base import Base
 from flask_login import UserMixin

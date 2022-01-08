@@ -62,7 +62,6 @@ class BookSingle():
         return ' / '.join(intro)
 
 
-
 class BookCollection():
 
     def __init__(self):
