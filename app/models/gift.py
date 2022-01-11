@@ -1,7 +1,7 @@
 from flask import current_app
 from flask_login import current_user
 
-from .base import Base
+from .base import Base, db
 from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 
@@ -24,17 +24,22 @@ class Gift(Base):
     @classmethod
     def recent(cls):
         # fixme 时间排序存在问题
-        recent_list = Gift.query.with_entities(
-            cls.isbn).filter_by(
-            launched=False).group_by(
-            cls.isbn).limit(current_app.config['NUM_UPLOAD_BOOK']).all()
-        recent_list = cls.__parse_group(recent_list)
+        # recent_list = Gift.query.with_entities(
+        #     cls.isbn).filter_by(
+        #     launched=False).group_by(
+        #     cls.isbn).limit(current_app.config['NUM_UPLOAD_BOOK']).all()
+        # recent_list = cls.__parse_group(recent_list)
+        sql = """
+                select g1.isbn from gift as g1 left join
+                (select substring_index(
+                group_concat(tmp.id order by tmp.create_time desc), ',',1) as id
+                from gift as tmp group by isbn)
+                as g2 on g1.id=g2.id 
+              """
 
+        list_ = db.session.execute(sql).fetchall()
+        recent_list = [{"isbn": isbn[0]} for isbn in list_]
         return recent_list
-
-    @classmethod
-    def __parse_group(cls, recent_list):
-        return [isbn[0] for isbn in recent_list]
 
     @classmethod
     def in_gifts(cls, isbn):
