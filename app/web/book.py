@@ -68,8 +68,9 @@ def book_detail(isbn):
 def recent():
     recent_list = Gift.recent()
     gifts = []
-    for v in recent_list.values():
-        single = BookSingle(YuShuBook().search_by_isbn(v).books)
-        gifts.append(single)
+    for gift in recent_list:
+        for v in gift.values():
+            single = BookSingle(YuShuBook().search_by_isbn(v).books)
+            gifts.append(single)
 
     return render_template("index.html", recent=gifts)
