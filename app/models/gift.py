@@ -23,12 +23,6 @@ class Gift(Base):
 
     @classmethod
     def recent(cls):
-        # fixme 时间排序存在问题
-        # recent_list = Gift.query.with_entities(
-        #     cls.isbn).filter_by(
-        #     launched=False).group_by(
-        #     cls.isbn).limit(current_app.config['NUM_UPLOAD_BOOK']).all()
-        # recent_list = cls.__parse_group(recent_list)
         sql = """
                 select g1.isbn from gift as g1 left join
                 (select substring_index(
