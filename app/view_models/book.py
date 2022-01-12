@@ -37,6 +37,10 @@
 
 
 class BookSingle():
+    """
+    单个书籍的封装，将api返回的json 数据作为对象的属性保存
+    book: yushu_book api 返回的单个书籍的源数据
+    """
 
     def __init__(self, book):
         self.__parse(book)
@@ -63,6 +67,10 @@ class BookSingle():
 
 
 class BookCollection():
+    """
+        作为BookSingle的集合
+
+    """
 
     def __init__(self):
         self.total = 0

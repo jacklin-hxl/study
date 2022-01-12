@@ -9,7 +9,7 @@ from ..models.gift import Gift
 @web.route("/my/gifts/")
 @login_required
 def my_gifts():
-    return "my gift"
+    Gift.get_user_gifts()
 
 
 @web.route("/gifts/book/<isbn>")
