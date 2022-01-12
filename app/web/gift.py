@@ -4,12 +4,18 @@ from flask_login import login_required, current_user
 from . import web
 from ..models.base import db
 from ..models.gift import Gift
+from ..spider.yushu_book import YuShuBook
+from ..view_models.book import BookSingle
 
 
 @web.route("/my/gifts/")
 @login_required
 def my_gifts():
-    Gift.get_user_gifts()
+    gifts = Gift.get_user_gifts()
+    gifts_ = []
+    for gift in gifts:
+        single = BookSingle(YuShuBook().search_by_isbn(gift["isbn"]).books)
+        gifts_.append(single)
 
 
 @web.route("/gifts/book/<isbn>")
