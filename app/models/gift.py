@@ -48,10 +48,11 @@ class Gift(Base):
 
     @classmethod
     def get_user_gifts(cls):
+        # todo 需要返回gift id
         sql = f"""
-                select w.isbn, count(w.uid) as count from
-                wish w, (select isbn from gift where uid = {current_user.id}) as g 
-                where g.isbn = w.isbn
-                group by w.isbn;
+                select g.isbn, count(w.isbn) as count from
+                wish w right join(select isbn from gift where uid = {current_user.id}) as g 
+                on g.isbn = w.isbn
+                group by g.isbn;
                 """
         return db.session.execute(sql).mappings()

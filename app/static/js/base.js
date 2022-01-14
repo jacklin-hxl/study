@@ -1,18 +1,15 @@
 (function () {
     url = window.location.pathname
-    if (url == '/my/gifts'){
-        $('#gifts').addClass('linking')
-    }
     if (url == '/' || url == '/recent/'){
         $('#recent').addClass('linking')
     }
-    if (url== '/my/gifts'){
+    if (url== '/my/gifts/'){
         $('#gifts').addClass('linking')
     }
-    if (url == '/my/wish'){
+    if (url == '/my/wish/'){
         $('#wishes').addClass('linking')
     }
-    if (url == '/pending'){
+    if (url == '/pending/'){
         $('#pending').addClass('linking')
     }
 })()

@@ -1,4 +1,4 @@
-from flask import current_app
+from flask import current_app, render_template
 from flask_login import login_required, current_user
 
 from . import web
@@ -6,16 +6,15 @@ from ..models.base import db
 from ..models.gift import Gift
 from ..spider.yushu_book import YuShuBook
 from ..view_models.book import BookSingle
+from ..view_models.inventory import Inventory
 
 
 @web.route("/my/gifts/")
 @login_required
 def my_gifts():
     gifts = Gift.get_user_gifts()
-    gifts_ = []
-    for gift in gifts:
-        single = BookSingle(YuShuBook().search_by_isbn(gift["isbn"]).books)
-        gifts_.append(single)
+    inventory = Inventory(gifts)
+    return render_template("my_gifts.html", gifts=inventory.details)
 
 
 @web.route("/gifts/book/<isbn>")
@@ -31,4 +30,6 @@ def save_to_gifts(isbn):
         return "ok"
     return "false"
 
-
+@web.route("/gift/redraw/<gid>")
+def redraw_from_gifts(gid):
+    pass
