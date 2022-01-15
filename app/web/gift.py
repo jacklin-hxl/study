@@ -30,6 +30,9 @@ def save_to_gifts(isbn):
         return "ok"
     return "false"
 
+
 @web.route("/gift/redraw/<gid>")
+@login_required
 def redraw_from_gifts(gid):
-    pass
+    Gift.revoke_gift(gid)
+    return 'ok'

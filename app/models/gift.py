@@ -31,8 +31,8 @@ class Gift(Base):
                 select g1.isbn from gift as g1 right join
                 (select substring_index(
                 group_concat(tmp.id order by tmp.create_time desc), ',',1) as id
-                from gift as tmp group by isbn)
-                as g2 on g1.id=g2.id 
+                from gift as tmp where status=1 group by isbn)
+                as g2 on g1.id=g2.id
                 """
 
         return db.session.execute(sql).mappings()
@@ -41,7 +41,7 @@ class Gift(Base):
     def in_gifts(cls, isbn):
         flag = False
         if current_user.is_authenticated:
-            if Wish.query.filter_by(uid=current_user.id, isbn=isbn,
+            if Gift.query.filter_by(uid=current_user.id, isbn=isbn,
                                     launched=False).first():
                 flag = True
         return flag
@@ -50,9 +50,15 @@ class Gift(Base):
     def get_user_gifts(cls):
         # todo 需要返回gift id
         sql = f"""
-                select g.isbn, count(w.isbn) as count from
-                wish w right join(select isbn from gift where uid = {current_user.id}) as g 
-                on g.isbn = w.isbn
+                select g.isbn, count(w.isbn) as count, any_value(g.id) as id from
+                wish w right join(select isbn, id from gift where uid = 1 and status=1) as g 
+                on g.isbn = w.isbn and w.status=1
                 group by g.isbn;
                 """
         return db.session.execute(sql).mappings()
+
+    @classmethod
+    def revoke_gift(cls, gid):
+        sql = f"update gift set status=0 where id = {gid} and status=1 and uid={current_user.id};"
+        with db.auto_commit():
+            db.session.execute(sql)

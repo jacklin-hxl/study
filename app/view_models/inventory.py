@@ -29,7 +29,7 @@ class Inventory:
     def __generator_imple(self):
         for i in self.__iter_detail:
             book = self.__get_book(dict(i).get("isbn"))
-            detail = {"book": book, "count": i.get("count"), "id": 1}
+            detail = {"book": book, "count": i.get("count"), "id": i.get("id")}
             yield detail
     
     def __get_book(self, isbn):

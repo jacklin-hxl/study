@@ -55,15 +55,20 @@ class BookSingle():
             else:
                 setattr(self, k, v)
 
-
     @property
     def intros(self):
         """
         鲁迅,老舍/出版社/¥35.00
         """
-        res = ','.join(self.author)
-        intro = filter(lambda x: True if x else False, [res, self.publisher, self.price])
+        intro = filter(lambda x: True if x else False, [self.join_author, self.publisher, self.price])
         return ' / '.join(intro)
+
+    @property
+    def join_author(self):
+        __author = getattr(self, 'author', False)
+        if __author:
+            return ','.join(__author)
+        return "未知"
 
 
 class BookCollection():
