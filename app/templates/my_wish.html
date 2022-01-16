@@ -22,20 +22,20 @@
                                   class="book-middle-title">{{ wish.book.title }}</span>
                         <div style="margin-top:6px;"
                              class="flex-vertical description-font">
-                            <span id="author">{{ wish.book.author }}</span>
+                            <span id="author">{{ wish.book.join_author }}</span>
                             <span id="publisher">{{ wish.book.publisher }}</span>
                             <span id="price">{{ wish.book.price }}</span>
                             <span id="isbn">{{ wish.book.isbn }}</span>
                         </div>
                         <a class="link-normal"
-                           href="{{ url_for('web.redraw_from_wish', isbn=wish.book.isbn) }}">
+                           href="{{ url_for('web.redraw_from_wish', wid=wish.id) }}">
                             撤销
                         </a>
                     </div>
                     <div class="col-md-3 flex-vertical">
-                        {% if wish.wishes_count %}
+                        {% if wish.count %}
                             <a href="{{ url_for('web.book_detail', isbn=wish.book.isbn) }}">
-                                <span class="bg-info">{{ wish.wishes_count }}人赠送</span>
+                                <span class="bg-info">{{ wish.count }}人赠送</span>
                             </a>
                         {% endif %}
                     </div>

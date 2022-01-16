@@ -51,7 +51,8 @@ class Gift(Base):
         # todo 需要返回gift id
         sql = f"""
                 select g.isbn, count(w.isbn) as count, any_value(g.id) as id from
-                wish w right join(select isbn, id from gift where uid = 1 and status=1) as g 
+                wish w right join
+                (select isbn, id from gift where uid = {current_user.id} and status=1 order by create_time) as g 
                 on g.isbn = w.isbn and w.status=1
                 group by g.isbn;
                 """
