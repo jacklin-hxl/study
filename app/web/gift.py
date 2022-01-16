@@ -4,8 +4,6 @@ from flask_login import login_required, current_user
 from . import web
 from ..models.base import db
 from ..models.gift import Gift
-from ..spider.yushu_book import YuShuBook
-from ..view_models.book import BookSingle
 from ..view_models.inventory import Inventory
 
 

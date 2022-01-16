@@ -63,7 +63,7 @@ def book_detail(isbn):
                                has_in_gifts=has_in_gifts, has_in_wishes=has_in_wishes)
 
 
-@web.route("/")
+@web.route("/", endpoint="index")
 @web.route("/recent/")
 def recent():
     recent_list = Gift.recent()
