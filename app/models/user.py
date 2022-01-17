@@ -1,7 +1,9 @@
+from flask import current_app
 from sqlalchemy import Column, String, Integer
 
-from .base import Base
+from .base import Base, db
 from flask_login import UserMixin
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, SignatureExpired
 
 from .gift import Gift
 from .wish import Wish
@@ -34,6 +36,28 @@ class User(UserMixin, Base):
         if gift or wish:
             return False
         return True
+
+    def generate_token(self, expiration=300):
+        s = Serializer(current_app.config["SECRET_KEY"], expires_in=expiration)
+        token = s.dumps({"uid": self.id}).decode("utf-8")
+        return token
+
+    @staticmethod
+    def reset_password(token, new_password):
+        s = Serializer(current_app.config["SECRET_KEY"])
+        try:
+            u = s.loads(token)
+            uid = u.get("uid")
+            user = User.query.get(uid)
+            if user:
+                sql = f"""update user set password={new_password} where id={uid}"""
+                with db.auto_commit():
+                    db.session.execute(sql)
+                return True
+        except SignatureExpired as e:
+            print("Signature Expired")
+            return False
+
 
 @login_manager.user_loader
 def load_user(uid):

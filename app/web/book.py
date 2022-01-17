@@ -1,8 +1,6 @@
 from flask import jsonify, request, make_response, flash, render_template
-from flask_login import current_user
 
 from app.forms.book import SearchForm
-import json
 
 from app.lib.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
