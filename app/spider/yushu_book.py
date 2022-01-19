@@ -58,12 +58,16 @@ class YuShuBook:
     def __fill_single(self, data):
         if data:
             self.total = 1
-            self.books = data
+            self.books.append(data)
 
     def __fill_collection(self, data):
         if data:
             self.total = data["total"]
             self.books = data["books"]
+
+    @property
+    def first(self):
+        return self.books[0]
 
     @staticmethod
     def solution_start(page):

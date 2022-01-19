@@ -58,6 +58,13 @@ class User(UserMixin, Base):
             print("Signature Expired")
             return False
 
+    @classmethod
+    def get_user_by_gid(cls, gid):
+        gift = Gift.query.filter_by(id=gid).first()
+        gifter = User.query.filter_by(id=gift.id).first()
+        return gifter
+
+
 
 @login_manager.user_loader
 def load_user(uid):

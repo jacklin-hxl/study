@@ -52,7 +52,7 @@ def book_detail(isbn):
         has_in_wishes = Wish.in_wishes(isbn)
         has_in_gifts = Gift.in_gifts(isbn)
 
-        book = BookSingle(YuShuBook().search_by_isbn(isbn).books)
+        book = BookSingle(YuShuBook().search_by_isbn(isbn).first)
 
         trade_wish = TradeInfo(Wish.query.filter_by(isbn=isbn, launched=False, status=1).all())
         trade_gift = TradeInfo(Gift.query.filter_by(isbn=isbn, launched=False, status=1).all())
@@ -67,7 +67,7 @@ def recent():
     recent_list = Gift.recent()
     gifts = []
     for gift in recent_list:
-        single = BookSingle(YuShuBook().search_by_isbn(gift["isbn"]).books)
+        single = BookSingle(YuShuBook().search_by_isbn(gift["isbn"]).first)
         gifts.append(single)
 
     return render_template("index.html", recent=gifts)

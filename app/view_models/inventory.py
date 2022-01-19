@@ -2,7 +2,6 @@ from app.spider.yushu_book import YuShuBook
 from app.view_models.book import BookSingle
 
 
-
 class Inventory:
     """
     [
@@ -35,7 +34,7 @@ class Inventory:
     def __get_book(self, isbn):
         if isbn:
             yushu = YuShuBook().search_by_isbn(isbn)
-            return BookSingle(yushu.books)
+            return BookSingle(yushu.first)
         else:
             raise Exception("need isbn")
 
