@@ -5,6 +5,7 @@ from .base import Base
 class Drift(Base):
     """
     请求赠送的字段信息
+    gift wish 的数据需要同步
     """
 
     # 赠送人信息
