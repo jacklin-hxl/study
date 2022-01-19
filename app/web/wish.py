@@ -1,4 +1,4 @@
-from flask import current_app, render_template, request
+from flask import current_app, render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_required
 
 from app.forms.drift import DriftForm
@@ -36,11 +36,19 @@ def my_wish():
 @login_required
 def send_drift(gid):
     form = DriftForm(request.form)
-    gifter = User.get_user_by_gid(gid)
-    user = User.query.filter_by(id=current_user.id).first()
+    gift = Gift.query.get_or_404(gid)
+    requestor = User.query.get_or_404(current_user.id)
+
     if request.method == "POST":
-        pass
-    return render_template("drift.html", gifter=gifter, user_beans=user.beans, form=form)
+        if not gift.requestor_in_gift():
+            flash("用户不能自己赠送自己")
+            return redirect(url_for("web.book_detail", isbn=gift.isbn))
+
+        if not requestor.can_drift():
+            flash("鱼豆不足")
+            return render_template("not_enough_beans.html", beans=requestor.beans)
+
+    return render_template("drift.html", gifter=gift.user, user_beans=requestor.beans, form=form)
 
 @web.route("/satisfy/<isbn>/<wid>")
 def satisfy_wish(isbn, wid):

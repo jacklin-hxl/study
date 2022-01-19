@@ -20,12 +20,16 @@ class Gift(Base):
     isbn = Column(String(20), nullable=False)
     launched = Column(type_=Boolean,  server_default='0')
 
+    # 判断请求用户是否是送给自己
+    def requestor_in_gift(self, uid):
+        if self.uid == uid:
+            return False
+        return True
+
     @classmethod
     def recent(cls):
         """
-        return
-        e.g.
-            [{"isbn":111111111},{"isbn":222222}]
+        return e.g. [{"isbn":111111111},{"isbn":222222}]
         """
         sql = """
                 select g1.isbn from gift as g1 right join

@@ -1,3 +1,5 @@
+from math import floor
+
 from flask import current_app
 from sqlalchemy import Column, String, Integer
 
@@ -42,6 +44,19 @@ class User(UserMixin, Base):
         token = s.dumps({"uid": self.id}).decode("utf-8")
         return token
 
+    # 判断用户的beans是否达到索要要求
+    # 用户 beans 大于 0
+    # 用户 需要每赠送两次，才能索要一次
+    def can_drift(self):
+        if self.beans < 1:
+            return False
+        success_gifts_count = Gift.query.filter_by(id=self.id, launched=True).count()
+        success_wishes_count = Wish.query.filter_by(id=self.id, launched=True).count()
+        if floor(success_gifts_count / 2) < success_wishes_count:
+            return False
+        return True
+
+
     @staticmethod
     def reset_password(token, new_password):
         s = Serializer(current_app.config["SECRET_KEY"])
@@ -61,7 +76,7 @@ class User(UserMixin, Base):
     @classmethod
     def get_user_by_gid(cls, gid):
         gift = Gift.query.filter_by(id=gid).first()
-        gifter = User.query.filter_by(id=gift.id).first()
+        gifter = User.query.filter_by(id=gift.uid).first()
         return gifter
 
 

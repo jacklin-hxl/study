@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, SmallInteger
 from .base import Base
 
 
@@ -16,18 +16,25 @@ class Drift(Base):
     # 请求者信息
     # 请求者姓名/id
     supplicant_name = Column(String(20), nullable=False)
-    supplicant_id = Column(Integer(), nullable=False)
-    adrress = Column(String(50), nullable=False)
+    supplicant_id = Column(Integer, nullable=False)
+    address = Column(String(50), nullable=False)
     mobile = Column(String(20), nullable=False)
     recipient_name = Column(String(20), nullable=False)
     message = Column(String())
 
     # 书籍信息
-    # isbn
+    # isbn title
     isbn = Column(String(50), nullable=False)
+    book_title = Column(String(20))
+    book_author = Column(String(20))
+    book_img = Column(String(20))
 
     # 交易的状态
-    pending = Column(Integer(), nullable=False)
+    pending = Column(SmallInteger, default=1)
+
+    # wish gift id
+    gift_id = Column(Integer, nullable=False)
+    wish_id = Column(Integer, nullable=False)
 
 
 
