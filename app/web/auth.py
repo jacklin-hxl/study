@@ -33,6 +33,8 @@ def login():
             if next_ and next_.startswith("/"):
                 return redirect(next_)
             return redirect(url_for("web.index"))
+        else:
+            flash("用户或密码错误")
 
     return render_template("auth/login.html", form=form)
 

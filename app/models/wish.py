@@ -29,7 +29,7 @@ class Wish(Base):
                 from gift as g 
                 right join 
                 (select isbn, id from wish where uid = {current_user.id} and status=1 order by create_time) as w
-                on w.isbn=g.isbn and status=1 
+                on w.isbn=g.isbn and status=1 and launched=False
                 group by w.isbn
                 """
         return db.session.execute(sql).mappings()
