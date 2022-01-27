@@ -39,27 +39,28 @@ def my_wish():
 @web.route("/send/drift/<gid>", methods=["POST", "GET"])
 @login_required
 def send_drift(gid):
+    # fixme 这里会重复添加交易
     form = DriftForm(request.form)
-    gift = Gift.query.get_or_404(gid)
-    wish = Wish.query.filter_by(uid=current_user.id, isbn=gift.isbn)
+    gifter = Gift.query.get_or_404(gid)
+    # wish = Wish.query.filter_by(uid=current_user.id, isbn=gift.isbn)
     requestor = User.query.get_or_404(current_user.id)
-    if not gift.requestor_in_gift():
+    if not gifter.requestor_in_gift(current_user.id):
         flash("用户不能自己赠送自己")
-        return redirect(url_for("web.book_detail", isbn=gift.isbn))
+        return redirect(url_for("web.book_detail", isbn=gifter.isbn))
 
     if not requestor.can_drift():
         flash("鱼豆不足")
         return render_template("not_enough_beans.html", beans=requestor.beans)
 
     if request.method == "POST":
-        book = BookSingle(YuShuBook().search_by_isbn(gift.isbn).first)
 
-        populate_drift(form=form, requestor=requestor,
-                       book=book, pending=enums.PENDING.STATUS_TRADING,
-                       gid=gid, wid=wish.id)
+        populate_drift(form=form, gifter=gifter, requestor=requestor,
+                       pending=enums.PENDING.STATUS_TRADING.value)
+        flash("提交成功")
+        return redirect(url_for("web.book_detail", isbn=gifter.isbn))
 
+    return render_template("drift.html", gifter=gifter.user, user_beans=requestor.beans, form=form)
 
-    return render_template("drift.html", gifter=gift.user, user_beans=requestor.beans, form=form)
 
 @web.route("/satisfy/<isbn>/<wid>")
 def satisfy_wish(isbn, wid):
@@ -71,14 +72,19 @@ def redraw_from_wish(wid):
     Wish.revoke_wish(wid=wid)
     return "ok"
 
-def populate_drift(form, requestor, book, pending, gid, wid):
+
+def populate_drift(form, gifter, requestor, pending):
     with db.auto_commit():
         drift = Drift()
         form.populate_obj(drift)
 
+        drift.giver_id = gifter.user.id
+        drift.giver_name = gifter.user.nickname
+
         drift.supplicant_id = requestor.id
         drift.supplicant_name = requestor.nickname
 
+        book = BookSingle(YuShuBook().search_by_isbn(gifter.isbn).first)
         drift.isbn = book.isbn
         drift.book_title = book.title
         drift.book_author = book.author
@@ -86,8 +92,8 @@ def populate_drift(form, requestor, book, pending, gid, wid):
 
         drift.pending = pending
 
-        drift.gift_id = gid
-        drift.wish_id = wid
+        drift.gift_id = gifter.id
+        db.session.add(drift)
 
 
 

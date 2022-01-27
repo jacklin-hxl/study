@@ -3,7 +3,7 @@ from werkzeug.exceptions import HTTPException
 
 web = Blueprint("web", __name__)
 
-from . import book, auth, gift, wish
+from . import book, auth, gift, wish, pending
 
 
 # AOP

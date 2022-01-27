@@ -62,10 +62,6 @@ def forget_password_request():
     return render_template("auth/forget_password_request.html")
 
 
-@web.route("/pending/")
-def pending():
-    pass
-
 
 @web.route("/personal_center/")
 def personal_center():

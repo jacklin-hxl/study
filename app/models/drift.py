@@ -1,5 +1,6 @@
+from flask_login import current_user
 from sqlalchemy import Column, String, Integer, SmallInteger
-from .base import Base
+from .base import Base, db
 
 
 class Drift(Base):
@@ -20,7 +21,7 @@ class Drift(Base):
     address = Column(String(50), nullable=False)
     mobile = Column(String(20), nullable=False)
     recipient_name = Column(String(20), nullable=False)
-    message = Column(String())
+    message = Column(String(50))
 
     # 书籍信息
     # isbn title
@@ -34,8 +35,26 @@ class Drift(Base):
 
     # wish gift id
     gift_id = Column(Integer, nullable=False)
-    wish_id = Column(Integer, nullable=False)
+    # wish_id = Column(Integer, nullable=False)
 
+    # @property
+    # def date(self):
+    #     return self.date
+
+    @property
+    def you_are(self):
+        if current_user.id == self.supplicant_id:
+            return "supplicant"
+        else:
+            return "gifter"
+
+    @property
+    def status_str(self):
+        pass
+
+    @property
+    def operator(self):
+        pass
 
 
 

@@ -20,9 +20,9 @@
                          class="col-md-8 flex-vertical description">
                         <div><span>书籍名：</span><span>{{ drift.book_title }}</span></div>
                         <div><span>作者：</span><span>{{ drift.book_author }}</span></div>
-                        <div><span>发起日期：</span><span>{{ drift.date }}</span></div>
+                        <div><span>发起日期：</span><span>{{ drift.create_datetime }}</span></div>
                         <div>
-                            {% if drift.you_are == 'requester' %}
+                            {% if drift.you_are == 'supplicant' %}
                                 <span>向他请求：</span>
                             {% else %}
                                 <span>请求者：</span>
